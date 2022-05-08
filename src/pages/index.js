@@ -45,14 +45,14 @@ export default function Home({ home, products }) {
           {products.map((product) => {
             return (
               <li key={product.slug}>
-                <Link href=''>
+                <Link href='/'>
                   <a>
                     <div className={styles.productImage}>
                       <Image
                         width={product.image.width}
                         height={product.image.height}
                         src={product.image.url}
-                        alt=""
+                        alt={product.title}
                       />
                     </div>
                     <h3 className={styles.productTitle}>{product.name}</h3>
