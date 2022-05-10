@@ -1,14 +1,14 @@
-import Head from 'next/head'
+import Head from "next/head";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
-import Layout from '@components/Layout';
-import Header from '@components/Header';
-import Image from 'next/image';
-import Container from '@components/Container';
-import Button from '@components/Button';
+import Layout from "@components/Layout";
+import Header from "@components/Header";
+import Image from "next/image";
+import Container from "@components/Container";
+import Button from "@components/Button";
 
-import styles from '@styles/Product.module.scss'
+import styles from "@styles/Product.module.scss";
 
-export default function Product({product}) {
+export default function Product({ product }) {
   return (
     <Layout>
       <Head>
@@ -28,13 +28,21 @@ export default function Product({product}) {
           </div>
           <div className={styles.productContent}>
             <h1>{product.name}</h1>
-            <div className={styles.productDescription} dangerouslySetInnerHTML={{__html: product.description.html}}/>
-           
-            <p className={styles.productPrice}>
-              {product.price} NOK
-            </p>
+            <div
+              className={styles.productDescription}
+              dangerouslySetInnerHTML={{ __html: product.description.html }}
+            />
+
+            <p className={styles.productPrice}>{product.price} NOK</p>
             <p className={styles.productBuy}>
-              <Button>
+              <Button
+                className="snipcart-add-item"
+                data-item-id={product.slug}
+                data-item-price={product.price}
+                data-item-url={`/products/${product.slug}`}
+                data-item-image={product.image.url}
+                data-item-name={product.name}
+              >
                 Add to Cart
               </Button>
             </p>
@@ -42,7 +50,7 @@ export default function Product({product}) {
         </div>
       </Container>
     </Layout>
-  )
+  );
 }
 
 export async function getStaticPaths() {
@@ -58,12 +66,12 @@ export async function getStaticPaths() {
           name
           price
           slug
-          image 
+          image
         }
       }
     `,
   });
-  const paths = data.data.products.map(product => ({
+  const paths = data.data.products.map((product) => ({
     params: {
       slug: product.slug,
     },
@@ -71,7 +79,7 @@ export async function getStaticPaths() {
   return {
     paths,
     fallback: false,
-  }
+  };
 }
 
 export async function getStaticProps({ params }) {
@@ -95,13 +103,13 @@ export async function getStaticProps({ params }) {
       }
     `,
     variables: {
-      slug: params.slug
-    }
+      slug: params.slug,
+    },
   });
   const product = data.data.product;
   return {
     props: {
       product,
     },
-  }
+  };
 }
