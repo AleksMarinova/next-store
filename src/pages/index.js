@@ -22,7 +22,7 @@ export default function Home({ home, products }) {
         <h1 className="sr-only">Space Jelly Gear</h1>
 
         <div className={styles.hero}>
-          <Link href="#">
+          <Link href={heroLink}>
             <a>
               <div className={styles.heroContent}>
                 <h2>{heroTitle}</h2>
