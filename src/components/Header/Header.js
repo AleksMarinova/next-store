@@ -1,10 +1,10 @@
-import Link from 'next/link';
-import { useSnipcart } from 'use-snipcart';
-import { FaShoppingCart } from 'react-icons/fa';
+import Link from "next/link";
+import { useSnipcart } from "use-snipcart";
+import { FaShoppingCart } from "react-icons/fa";
 
-import Container from '@components/Container';
+import Container from "@components/Container";
 
-import styles from './Header.module.scss';
+import styles from "./Header.module.scss";
 
 const Header = () => {
   const { cart = {} } = useSnipcart();
@@ -34,25 +34,21 @@ const Header = () => {
           </li>
         </ul>
         <p className={styles.headerCart}>
-          <button className="snipcart-checkout" >
+          <button className="snipcart-checkout">
             <FaShoppingCart />
-            <span>
-              {cart.subtotal?.toFixed(2)} NOK
-            </span>
+            <span>{cart.subtotal?.toFixed(2)} NOK</span>
           </button>
         </p>
         <ul className={styles.headerLocales}>
           <li>
             <Link href="#">
-              <a>
-                ES
-              </a>
+              <a>ES</a>
             </Link>
           </li>
         </ul>
       </Container>
     </header>
-  )
-}
+  );
+};
 
 export default Header;
