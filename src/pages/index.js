@@ -97,13 +97,13 @@ export async function getStaticProps() {
           slug
           heroBackground
         }
-        products(where: {categories_some: {slug: "featured"}}) {
+        products(where: { categories_some: { slug: "featured" } }) {
           id
-               name
-               price
-               slug
-               image
-       }
+          name
+          price
+          slug
+          image
+        }
       }
     `,
   });
