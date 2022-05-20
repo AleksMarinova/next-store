@@ -1,13 +1,23 @@
 import Head from "next/head";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
+import center from '@turf/center';
+import { points} from  '@turf/helpers';
 import Layout from "@components/Layout";
 import Container from "@components/Container";
 import Map from "@components/Map";
+import { useState, useEffect } from 'react';
 
 import styles from "@styles/Page.module.scss";
 
 export default function Stores({ storeLocations }) {
+  const [selectedStore, setSelectedStore] = useState();
+
+  const features = points(storeLocations.map(({location}) => {
+    return [location.latitude, location.longitude]
+  }));
+
+  const [defaultLatitude, defaultLongitude] = center(features)?.geometry.coordinates;
   return (
     <Layout>
       <Head>
@@ -22,13 +32,18 @@ export default function Stores({ storeLocations }) {
           <div className={styles.storesLocations}>
             <ul className={styles.locations}>
               {storeLocations.map((store) => {
+                const handleOnClick = () => {
+                  setSelectedStore(store.id);
+                }
                 return (
                   <li key={store.id}>
                     <p className={styles.locationName}>{store.name}</p>
                     <address>{store.address}</address>
                     <p>{store.phoneNumber}</p>
                     <p className={styles.locationDiscovery}>
-                      <button>View on Map</button>
+                      <button
+                        onClick={()=>handleOnClick()}
+                      >View on Map</button>
                       <a
                         href={`https://www.google.com/maps/dir//${store.location.latitude},${store.location.longitude}/@${store.location.latitude},${store.location.longitude},12z/`}
                         target="_blank"
@@ -48,13 +63,26 @@ export default function Stores({ storeLocations }) {
             <div className={styles.storesMapContainer}>
               <Map
                 className={styles.map}
-                center={[0, 0]}
-                zoom={2}
+                center={[defaultLatitude, defaultLongitude]}
+                zoom={10}
                 scrollWheelZoom={false}
               >
                 {({ TileLayer, Marker, Popup }, map) => {
+                  const MapEffect=() => {
+                    useEffect(() => {
+                     if (!selectedStore) {
+                       return;
+                     }
+                     const {location} = storeLocations.find(({id})=>{
+                        return id === selectedStore
+                     })
+                     map.setView([location.latitude, location.longitude], 14);
+                    }, [selectedStore])
+                    return null;
+                  }
                   return (
                     <>
+                    <MapEffect/>
                       <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

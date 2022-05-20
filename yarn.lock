@@ -1100,6 +1100,34 @@
   "resolved" "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.1.0.tgz"
   "version" "1.1.0"
 
+"@turf/bbox@^6.5.0":
+  "integrity" "sha512-RBbLaao5hXTYyyg577iuMtDB8ehxMlUqHEJiMs8jT1GHkFhr6sYre3lmLsPeYEi/ZKj5TP5tt7fkzNdJ4GIVyw=="
+  "resolved" "https://registry.npmjs.org/@turf/bbox/-/bbox-6.5.0.tgz"
+  "version" "6.5.0"
+  dependencies:
+    "@turf/helpers" "^6.5.0"
+    "@turf/meta" "^6.5.0"
+
+"@turf/center@^6.5.0":
+  "integrity" "sha512-T8KtMTfSATWcAX088rEDKjyvQCBkUsLnK/Txb6/8WUXIeOZyHu42G7MkdkHRoHtwieLdduDdmPLFyTdG5/e7ZQ=="
+  "resolved" "https://registry.npmjs.org/@turf/center/-/center-6.5.0.tgz"
+  "version" "6.5.0"
+  dependencies:
+    "@turf/bbox" "^6.5.0"
+    "@turf/helpers" "^6.5.0"
+
+"@turf/helpers@^6.5.0":
+  "integrity" "sha512-VbI1dV5bLFzohYYdgqwikdMVpe7pJ9X3E+dlr425wa2/sMJqYDhTO++ec38/pcPvPE6oD9WEEeU3Xu3gza+VPw=="
+  "resolved" "https://registry.npmjs.org/@turf/helpers/-/helpers-6.5.0.tgz"
+  "version" "6.5.0"
+
+"@turf/meta@^6.5.0":
+  "integrity" "sha512-RrArvtsV0vdsCBegoBtOalgdSOfkBrTJ07VkpiCnq/491W67hnMWmDu7e6Ztw0C3WldRYTXkg3SumfdzZxLBHA=="
+  "resolved" "https://registry.npmjs.org/@turf/meta/-/meta-6.5.0.tgz"
+  "version" "6.5.0"
+  dependencies:
+    "@turf/helpers" "^6.5.0"
+
 "@types/json5@^0.0.29":
   "integrity" "sha1-7ihweulOEdK4J7y+UnC86n8+ce4="
   "resolved" "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
